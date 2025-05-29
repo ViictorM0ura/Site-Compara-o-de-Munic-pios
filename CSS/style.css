@@ -1,0 +1,215 @@
+/* Estilo para o corpo da página */
+body {
+    font-family: Arial, sans-serif;
+    color: black;
+    transition: background-color 0.3s, color 0.3s;
+    background-color: #e4f4e0; /* Cor de fundo verde suave */
+}
+
+/* Estilo padrão do fundo da página */
+body.index-page {
+    background-image: url('../imagens/imagem.jpg');  /* Sobe uma pasta para acessar a pasta 'imagens' */
+    background-size: cover;
+    background-position: center;
+}
+
+/* Remover imagem de fundo para outras páginas */
+body.no-image {
+    background-image: none;
+}
+
+.dark-theme {
+    background-color: black;
+    color: white;
+}
+
+/* Container principal */
+.container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+/* Cabeçalho */
+header {
+    text-align: center;
+    margin-bottom: 20px;
+    position: relative;
+}
+
+#themeToggle {
+    position: absolute;
+    right: 20px;
+    top: 20px;
+    padding: 5px 10px;
+}
+
+/* Controles (botões e seletores) */
+.controls {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+
+select {
+    margin-right: 10px;
+    padding: 5px;
+}
+
+button {
+    padding: 5px 10px;
+}
+
+/* Tabelas */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+table, th, td {
+    border: 1px solid black;
+}
+
+.dark-theme table, .dark-theme th, .dark-theme td {
+    border: 1px solid white;
+}
+
+th, td {
+    padding: 8px;
+    text-align: left;
+}
+
+/* Mensagem de erro */
+.error-message {
+    color: red;
+}
+
+/* Estilos específicos para o conteúdo */
+.header, .controls, #dataDisplay {
+    margin: 20px;
+}
+
+/* Canvas para gráficos */
+canvas {
+    max-width: 100%;
+    height: 80vh;   /* Ajusta a altura do gráfico */
+    margin: 20px auto;
+    display: block;
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+    .controls {
+        flex-direction: column;
+        top: 10%;
+    }
+
+    .controls select,
+    .controls button {
+        width: 80%;
+        margin-bottom: 10px;
+    }
+}
+
+/* Estilo para o ícone de interrogação */
+.tooltip {
+    cursor: pointer;
+    font-size: 20px;  /* Tamanho do ícone */
+    margin-left: 10px;
+}
+
+/* Mostrar a dica ao passar o mouse */
+.tooltip:hover::after {
+    content: "Este site permite consultar e comparar dados relacionados ao Rio Paraguaçu, incluindo informações sobre o uso da terra e mudanças ao longo dos anos.";
+    position: fixed; /* Fixa a posição na tela */
+    top: 50%;  /* Coloca a bolha no meio vertical da tela */
+    left: 50%; /* Coloca a bolha no meio horizontal da tela */
+    transform: translate(-50%, -50%); /* Centraliza completamente */
+    background-color: #333; /* Cor de fundo da bolha */
+    color: white; /* Cor do texto */
+    padding: 10px 15px; /* Mais espaçamento */
+    border-radius: 8px; /* Borda arredondada */
+    white-space: normal; /* Permite quebra de linha se necessário */
+    font-size: 14px; /* Tamanho do texto */
+    z-index: 1; /* Garante que a bolha fique acima de outros elementos */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3); /* Sombra para dar destaque */
+    max-width: 300px; /* Limita a largura da bolha */
+    text-align: center; /* Centraliza o texto dentro da bolha */
+    width: auto; /* Permite que a bolha se ajuste à largura do conteúdo */
+    min-width: 200px; /* Garante que a bolha tenha uma largura mínima */
+}
+
+/* Estilo comum para todos os botões */
+button {
+    padding: 10px 15px;
+    background-color: #4CAF50; /* Cor de fundo */
+    color: white; /* Cor do texto */
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px;
+    z-index: 2; /* Garante que o botão fique acima de outros elementos */
+    margin: 5px;
+}
+
+button:hover {
+    background-color: #45a049; /* Cor de fundo ao passar o mouse */
+}
+
+/* Estilo para o botão "Voltar para o Início" */
+#homeButton {
+    position: absolute;
+    top: 20px; /* Distância do topo */
+    left: 20px; /* Distância da esquerda */
+}
+
+/* Estilo para o botão "Mudar Tema" */
+#themeToggle {
+    position: absolute;
+    right: 20px; /* Distância da direita */
+    top: 20px; /* Distância do topo */
+}
+
+/* Estilo para os elementos de seleção (select) */
+select {
+    padding: 10px;
+    font-size: 14px;
+    border: 1px solid #4CAF50; /* Cor da borda para combinar com os botões */
+    border-radius: 5px;
+    background-color: #4CAF50; /* Cor de fundo igual aos botões */
+    color: white; /* Cor do texto */
+    cursor: pointer;
+    margin: 5px;
+    appearance: none; /* Remove a aparência padrão do select */
+    -webkit-appearance: none; /* Para navegadores baseados em WebKit (Chrome, Safari) */
+    -moz-appearance: none; /* Para Firefox */
+}
+
+/* Adiciona um ícone de seta customizado no select */
+select::-ms-expand {
+    display: none; /* Remove a seta padrão do IE */
+}
+
+/* Estilo para as opções dentro do select */
+select option {
+    background-color: #4CAF50;
+    color: white;
+    padding: 10px;
+}
+
+/* Estilo para o botão de seleção e controle */
+.controls button {
+    margin-left: 10px;
+}
+
+/* Estilo para quando o select estiver em foco */
+select:focus {
+    outline: none; /* Remove a borda azul do foco */
+    border-color: #45a049; /* Borda com cor mais escura ao focar */
+}
+
+/* Efeito ao passar o mouse no select */
+select:hover {
+    border-color: #45a049; /* Borda com cor mais escura */
+}

@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Comparação de Dados</title>
+    <link rel="stylesheet" href="../CSS/style.css"> <!-- Corrigido para apontar para a pasta CSS -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+
+<body>
+    <h1>Comparação de Dados entre os Anos</h1>
+
+    <button onclick="window.location.href='index.html'">Voltar ao Dashboard</button> <!-- Corrigido para apontar para a pasta html -->
+
+    <button id="themeToggle" onclick="toggleTheme()">Mudar Tema</button>
+
+    <canvas id="myChart" width="400" height="200"></canvas>
+    <div id="dataDisplay"></div>
+
+    <script src="../javaScript/script.js"></script> <!-- Corrigido para apontar para a pasta javaScript -->
+
+    <script>
+
+        function toggleTheme() {
+            document.body.classList.toggle('dark-theme');
+        }
+
+        async function fetchData() {
+            const years = [2000, 2010, 2022];
+            const allData = {};
+
+            for (const year of years) {
+                try {
+                    const response = await fetch(`http://localhost:3000/dados/${year}`);
+                    if (!response.ok) {
+                        throw new Error(`Erro na resposta: ${response.status}`);
+                    }
+                    const data = await response.json();
+                    allData[year] = data;
+                } catch (error) {
+                    console.error(`Erro ao buscar dados para ${year}:`, error);
+                }
+            }
+
+            displayData(allData, years);
+        }
+
+        function displayData(allData, years) {
+            const dataDisplay = document.getElementById('dataDisplay');
+            const table = document.createElement('table');
+            const headerRow = document.createElement('tr');
+
+            const headers = ['Município', 'Nome', 'Bacia', 'Área 2000 (ha)', 'Área 2010 (ha)', 'Área 2022 (ha)'];
+            headers.forEach(headerText => {
+                const th = document.createElement('th');
+                th.textContent = headerText;
+                headerRow.appendChild(th);
+            });
+            table.appendChild(headerRow);
+
+            const labels = [];
+            const dataset2000 = [];
+            const dataset2010 = [];
+            const dataset2022 = [];
+
+            const municipalities = new Set();
+            years.forEach(year => {
+                if (allData[year]) {
+                    allData[year].forEach(item => {
+                        municipalities.add(item.MUNICIPIO);
+                    });
+                }
+            });
+
+            municipalities.forEach(municipio => {
+                const row = document.createElement('tr');
+                const cells = [municipio];
+                let area2000 = 'N/A', area2010 = 'N/A', area2022 = 'N/A';
+                let nome = '', bacia = '';
+
+                years.forEach(year => {
+                    const item = allData[year] ? allData[year].find(data => data.MUNICIPIO === municipio) : null;
+                    if (item) {
+                        if (year === 2000) {
+                            area2000 = item.areaHa;
+                            nome = item.NOME;
+                            bacia = item.BACIA;
+                        } else if (year === 2010) {
+                            area2010 = item.areaHa;
+                        } else if (year === 2022) {
+                            area2022 = item.areaHa;
+                        }
+                    }
+                });
+
+                cells.push(nome, bacia, area2000, area2010, area2022);
+                cells.forEach(cellText => {
+                    const td = document.createElement('td');
+                    td.textContent = cellText;
+                    row.appendChild(td);
+                });
+
+                table.appendChild(row);
+
+                labels.push(municipio);
+                dataset2000.push(area2000);
+                dataset2010.push(area2010);
+                dataset2022.push(area2022);
+            });
+
+            dataDisplay.innerHTML = '';
+            dataDisplay.appendChild(table);
+
+            const ctx = document.getElementById('myChart').getContext('2d');
+            new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: labels,
+                    datasets: [
+                        {
+                            label: 'Área 2000 (ha)',
+                            data: dataset2000,
+                            backgroundColor: 'rgba(255, 99, 132, 0.2)',
+                            borderColor: 'rgba(255, 99, 132, 1)',
+                            borderWidth: 1
+                        },
+                        {
+                            label: 'Área 2010 (ha)',
+                            data: dataset2010,
+                            backgroundColor: 'rgba(54, 162, 235, 0.2)',
+                            borderColor: 'rgba(54, 162, 235, 1)',
+                            borderWidth: 1
+                        },
+                        {
+                            label: 'Área 2022 (ha)',
+                            data: dataset2022,
+                            backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                            borderColor: 'rgba(75, 192, 192, 1)',
+                            borderWidth: 1
+                        }
+                    ]
+                },
+                options: {
+                    scales: {
+                        y: {
+                            beginAtZero: true
+                        }
+                    }
+                }
+            });
+        }
+
+        fetchData().catch(error => {
+            console.error('Erro ao buscar dados:', error);
+        });
+    </script>
+</body>
+
+</html>

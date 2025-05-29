@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+    <!-- Atualizando o link para o CSS na pasta CSS -->
+    <link rel="stylesheet" href="CSS/style.css">
+    <style>
+        /* Estilo para o botão "Voltar para o Início" */
+        #homeButton {
+            position: absolute;
+            top: 20px; /* Distância do topo */
+            left: 20px; /* Distância da esquerda */
+            padding: 10px 15px;
+            background-color: #4CAF50; /* Cor de fundo */
+            color: white; /* Cor do texto */
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 14px;
+            z-index: 2; /* Garante que o botão fique acima de outros elementos */
+        }
+
+        #homeButton:hover {
+            background-color: #45a049; /* Cor de fundo ao passar o mouse */
+        }
+    </style>
+</head>
+<body class="index-page">  <!-- Aplica a classe index-page no index.html -->
+    <header>
+        <h1>Dashboard de Dados
+            <!-- Ícone de dúvida com texto explicativo -->
+            <span class="tooltip">❓</span>
+        </h1>
+        <button id="themeToggle" onclick="toggleTheme()">Mudar Tema</button>
+    </header>
+
+    <!-- Botão "Voltar para o Início" no canto superior esquerdo -->
+    <button id="homeButton" onclick="window.location.href=window.location.href">Voltar para o Início</button>
+
+    <div class="controls">
+        <select id="yearSelect">
+            <option value="">Selecione um ano</option>
+            <option value="2000">2000</option>
+            <option value="2010">2010</option>
+            <option value="2022">2022</option>
+        </select>
+        <button onclick="window.location.href='comparacao.html'">Comparar Anos</button>
+        <button onclick="window.location.href='municipios.html'">Comparar Municípios</button>
+    </div>
+
+    <div id="dataDisplay"></div>
+
+    <!-- Atualizando o script para o JS na pasta javaScript -->
+    <script src="javaScript/script.js"></script>
+</body>
+</html>

@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Comparação de Municípios</title>
+    <link rel="stylesheet" href="CSS/style.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        /* Estilo para o botão "Voltar ao Dashboard" */
+        #backButton {
+            position: absolute;
+            top: 20px; /* Distância do topo */
+            left: 20px; /* Distância da esquerda */
+            padding: 10px 15px;
+            background-color: #4CAF50; /* Cor de fundo */
+            color: white; /* Cor do texto */
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 14px;
+            z-index: 2; /* Garante que o botão fique acima de outros elementos */
+        }
+
+        #backButton:hover {
+            background-color: #45a049; /* Cor de fundo ao passar o mouse */
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Comparação de Municípios</h1>
+        <button id="themeToggle" onclick="toggleTheme()">Mudar Tema</button>
+    </header>
+
+    <!-- Botão "Voltar ao Dashboard" no canto superior esquerdo -->
+    <button id="backButton" onclick="window.location.href='index.html'">Voltar ao Dashboard</button>
+
+    <div class="controls">
+        <select id="municipio1">
+            <option value="">Selecione o primeiro município</option>
+        </select>
+        <select id="municipio2">
+            <option value="">Selecione o segundo município</option>
+        </select>
+        <button onclick="compararMunicipios()">Comparar</button>
+    </div>
+
+    <div id="dataDisplay"></div>
+
+    <canvas id="comparisonChart" width="400" height="200"></canvas>
+
+    <script src="javaScript/municipios.js"></script>
+</body>
+</html>
