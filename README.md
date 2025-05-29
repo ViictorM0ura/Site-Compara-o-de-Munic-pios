@@ -1,4 +1,5 @@
 🌐 Comparação de Municípios
+
 📝 Descrição
 Este projeto é uma plataforma interativa para comparar dados de municípios ao longo de diferentes anos (2000, 2010 e 2022). O sistema permite que os usuários selecionem dois municípios e visualizem uma comparação das áreas de cada município nos três anos, exibida em tabelas e gráficos interativos.
 
